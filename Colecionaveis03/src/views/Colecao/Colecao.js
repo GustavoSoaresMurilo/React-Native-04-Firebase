@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, FlatList } from 'react-native';
 import estiloColecao from './estiloColecao';
 import ItemLista from '../../components/ItemLista/ItemLista';
 import { MaterialIcons } from '@expo/vector-icons';
+import Item from '../Item/Item';
 
 function Colecao({ navigation }) {
 
@@ -45,6 +46,12 @@ function Colecao({ navigation }) {
     const voltar = () => {
         navigation.navigate('Inicial')
     }
+    const adicionar = () => {
+        navigation.navigate('Item',{item: {}, operacao: 'adicionar'})
+    }
+    const editar = () => {
+        navigation.navigate('Item',{item:Item,operacao: 'editar'})
+    }
     
     return (
         <View style={estiloColecao.container}>
@@ -61,7 +68,7 @@ function Colecao({ navigation }) {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item) => item.id}
                 data={colecao}
-                renderItem={ ({item}) => <ItemLista data={item} />}
+                renderItem={ ({item}) => <ItemLista data={item} detalhe={() => editar(item)} />}
             />
 
         </View>
